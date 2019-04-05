@@ -1,49 +1,157 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>OpenSauce</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/blood.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>OpenSauce</h1>
+				<h4>Damian Petroff, Malik Fleuri, Raphaël Margueron</h4>
+			</section>
+			<section>
+				<h2>Table des matières</h2>
+				<ul>
+					<li>Principes</li>
+					<li>Ajouts</li>
+					<li>Reports</li>
+					<li>WebSockets</li>
+					<li>Améliorations possibles</li>
+					<li>Conclusion</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Principe du jeu</h2>
+					<img src="img/game.png">
+				</section>
+				<section>
+					<h2>PopSauce</h2>
+					<img src="img/popsauce.png">
+				</section>
+				<section>
+					<h2>Machine à état</h2>
+					<img src="img/OpenSauceStateMachine.svg">
+				</section>
+			</section>
+
+			<section>
+				<h2>Ajouts</h2>
+			</section>
+			
+			<section>
+				<h2>Reports</h2>
+			</section>
+
+			<section>
+				<section>
+					<h2>Websockets</h2>
+					<ul>
+						<li>Django-Channels</li>
+						<li>Nouvelles routes pour les Websockets</li>
+						<li>WebsocketConsumer : connect, disconnect, receive</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Websockets</h2>
+					<i>routing.py</i>
+					<pre><code data-trim data-noescape>
+					from django.conf.urls import url
+					from .game.OpenSauceConsumer import OpenSauceConsumer
+					websocket_urlpatterns = [
+					    url(r'^lobby/(?P<lobby_name>[^/]+)/', OpenSauceConsumer),
+					]
+					</code></pre>
+				</section>
+				<section>
+					<h2>Websockets</h2>
+					<i>OpenSauceConsumer.py</i>
+					<pre><code data-trim data-noescape>
+					class OpenSauceConsumer(WebsocketConsumer):
+						def connect(self):
+						self.accept()
+						# do stuff
+						# self.scope["url_route"]["kwargs"]["lobby_name"]
+						# self.scope["headers"]["sec-websocket-key"]
+						def disconnect(self, close_code):
+						#do stuff
+						def receive(self, text_data):
+						data = json.loads(text_data)
+						# do stuff
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h2>Améliorations possibles</h2>
+				<ul>
+					<li>Plus d'options pour les salons</li>
+					<li>Corriger quelques problèmes mineurs</li>
+					<li>Et plein d'autres, liste complètes : <a href="https://github.com/HE-Arc/OpenSauce/issues">Issues GitHub</a></li>
+				</ul>
+			</section>
+			<section>
+				<h2>Conclusion</h2>
+				<ul>
+					<li></li>
+				</ul>
+			</section>
 		</div>
+	</div>
 
-		<script src="js/reveal.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			slideNumber: true,
+			transitionSpeed: 'slow',
+			transition: 'convex',
+			dependencies: [{
+					src: 'plugin/markdown/marked.js'
+				},
+				{
+					src: 'plugin/markdown/markdown.js'
+				},
+				{
+					src: 'plugin/notes/notes.js',
+					async: true
+				},
+				{
+					src: 'plugin/zoom-js/zoom.js',
+					async: true
+				},
+				{
+					src: 'plugin/highlight/highlight.js',
+					async: true
+				}
+			]
+		});
+	</script>
+</body>
+
 </html>
