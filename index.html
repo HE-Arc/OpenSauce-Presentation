@@ -60,7 +60,7 @@
 			<section>
 				<h2>Ajouts</h2>
 			</section>
-			
+
 			<section>
 				<h2>Reports</h2>
 			</section>
@@ -78,8 +78,6 @@
 					<h2>Websockets</h2>
 					<i>routing.py</i>
 					<pre><code data-trim data-noescape>
-					from django.conf.urls import url
-					from .game.OpenSauceConsumer import OpenSauceConsumer
 					websocket_urlpatterns = [
 					    url(r'^lobby/(?P<lobby_name>[^/]+)/', OpenSauceConsumer),
 					]
@@ -91,15 +89,15 @@
 					<pre><code data-trim data-noescape>
 					class OpenSauceConsumer(WebsocketConsumer):
 						def connect(self):
-						self.accept()
-						# do stuff
-						# self.scope["url_route"]["kwargs"]["lobby_name"]
-						# self.scope["headers"]["sec-websocket-key"]
+							self.accept()
+							# do stuff
+							# self.scope["url_route"]["kwargs"]["lobby_name"]
+							# self.scope["headers"]["sec-websocket-key"]
 						def disconnect(self, close_code):
-						#do stuff
+							#do stuff
 						def receive(self, text_data):
-						data = json.loads(text_data)
-						# do stuff
+							data = json.loads(text_data)
+							# do stuff
 					</code></pre>
 				</section>
 			</section>
