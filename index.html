@@ -29,15 +29,18 @@
 		<div class="slides">
 			<section>
 				<h1>OpenSauce</h1>
-				<h4>Damian Petroff, Malik Fleuri, Raphaël Margueron</h4>
+				Damian Petroff<br>
+				Malik Fleury<br>
+				Raphaël Margueron
 			</section>
 			<section>
-				<h2>Table des matières</h2>
+				<h2>Sommaire</h2>
 				<ul>
 					<li>Principes</li>
-					<li>Ajouts</li>
-					<li>Reports</li>
+					<li>Démonstration</li>
 					<li>WebSockets</li>
+					<li>Valeur du projet</li>
+					<li>Problèmes rencontrés</li>
 					<li>Améliorations possibles</li>
 					<li>Conclusion</li>
 				</ul>
@@ -45,24 +48,32 @@
 			<section>
 				<section>
 					<h2>Principe du jeu</h2>
-					<img src="img/game.png">
+					<img src="img/popsauce.png">
 				</section>
 				<section>
-					<h2>PopSauce</h2>
-					<img src="img/popsauce.png">
+					<h2>Motivation</h2>
+					<h5>Désavantages de PopSauce :</h5>
+					<ul>
+						<li>Instabilité</li>
+						<li>Non-diversité</li>
+						<li>Nombre de joueur minimum</li>
+						<li>Source-fermée</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h2>Démonstration</h2>
+			</section>
+
+			<section>
+				<section>
+					<h2>Fonctionnement</h2>
 				</section>
 				<section>
 					<h2>Machine à état</h2>
 					<img src="img/OpenSauceStateMachine.svg">
 				</section>
-			</section>
-
-			<section>
-				<h2>Ajouts</h2>
-			</section>
-
-			<section>
-				<h2>Reports</h2>
 			</section>
 
 			<section>
@@ -103,17 +114,57 @@
 			</section>
 
 			<section>
+				<h2>Valeur du projet</h2>
+				<section>
+					<br>
+					<iframe class="center" src="https://canary.discordapp.com/widget?id=552925373235462381&theme=light" width="50%" height="500px" frameborder="0">
+						Your browser doesnt support Discord server preview !
+					</iframe>
+				</section>
+				<section>
+					<br>
+					<img src="./img/opensauce_lobby.jpeg" height="450px">
+					<img src="./img/popsauce_lobby.jpeg" height="450px">
+				</section>
+				<section>
+					<br>
+					<br>
+					<img src="./img/opensauce_settings.png" height="450px">
+				</section>
+				<section>
+					<br>
+					<img src="./img/opensauce_reportmodal.png" height="450px">
+				</section>
+				<section>
+					<br>
+					<br>
+					<img src="./img/opensauce_reportlist.png" height="450px">
+				</section>
+			</section>
+
+			<section>
+				<h2>Difficultés rencontrées</h2>
+				<ul>
+					<li>Déploiement : daphne, uwsgi, nginx</li>
+					<li>Seeding</li>
+				</ul>
+			</section>
+
+			<section>
 				<h2>Améliorations possibles</h2>
 				<ul>
 					<li>Plus d'options pour les salons</li>
+					<li>Connexion avec les réseaux sociaux</li>
+					<li>Profil permanent</li>
 					<li>Corriger quelques problèmes mineurs</li>
-					<li>Et plein d'autres, liste complètes : <a href="https://github.com/HE-Arc/OpenSauce/issues">Issues GitHub</a></li>
 				</ul>
 			</section>
+
 			<section>
 				<h2>Conclusion</h2>
 				<ul>
-					<li></li>
+					<li>Apprentissage de Django</li>
+					<li>Websockets</li>
 				</ul>
 			</section>
 		</div>
@@ -129,6 +180,7 @@
 			slideNumber: true,
 			transitionSpeed: 'slow',
 			transition: 'convex',
+			history: true,
 			dependencies: [{
 					src: 'plugin/markdown/marked.js'
 				},
@@ -149,6 +201,14 @@
 				}
 			]
 		});
+	</script>
+	<script>
+		let imgs = document.getElementsByTagName("img");
+		for(let i = 0; i < imgs.length; i++)
+		{
+			let img = imgs[i];
+			img.style = "border:0";
+		}
 	</script>
 </body>
 
